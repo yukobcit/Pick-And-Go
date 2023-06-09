@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ProductVM>
+@using PickAndGo.ViewModels
+
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="products">
+    <h1>Products</h1>
+
+    <table class="table">
+        <thead class="table-heading">
+            <tr>
+                <th class="rounded-start">
+                    Product Image
+                </th>
+                <th>
+                    Product ID
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Base Price
+                </th>
+                <th>
+                    Image URL
+                </th>
+                <th class="rounded-end">
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="align-middle">
+                    <td>
+                        <img class="sandwich-image2" src="~/images/@item.Image" alt="Sandwich">
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(model => item.ProductId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Description)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(model => item.BasePrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Image)
+                    </td>
+                    <td class="text-end">
+                        <a type="button" class="btn btn-sm btn-outline-secondary"asp-action="ProductDetails" asp-route-productId="@item.ProductId">Details</a>
+                        <a type="button" class="btn btn-sm btn-outline-secondary" asp-action="ProductEdit" asp-route-productId="@item.ProductId">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</main>

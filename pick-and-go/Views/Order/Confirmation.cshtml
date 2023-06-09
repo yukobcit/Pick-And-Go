@@ -1,0 +1,36 @@
+﻿@model PickAndGo.Models.OrderHeader
+
+@{
+    ViewData["Title"] = "Confirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    // Retrieve the value of the "email" session variable
+    string? email = Context.Session.GetString("email");
+}
+<br />
+    <main class="confirmation d-flex flex-column align-items-center">
+    <div class="text-success m-3"><i class="fa-solid fa-check fs-1"></i></div>
+    <div class="fs-1 fw-bolder m-3">Thank you for your order</div>
+    <div class="text-center fs-4">
+        Your $@Html.DisplayFor(model => model.OrderValue) @Html.DisplayFor(model => model.Currency) @Html.DisplayFor(model => model.PaymentType) transaction was successful.
+     </div>
+    <div class="rounded-3 p-4 m-5 text-center" style="background-color: lightgray">
+        <div class="fs-6">Keep this transaction Id for future reference.</div>
+        <div class="fs-6"> @Html.DisplayFor(model => model.PaymentId)</div>
+    </div>
+    <div class="fs-6">A confirmation email has been sent to <span class="fw-bold">@email</span></div>
+    <div style="margin-top: 50px;">
+
+    @*<h4>Thank you for choosing Sandwich Palace for your sandwich needs!</h4>
+    <div class="d-flex flex-column align-items-center mt-3">
+            <p>Visit us at:</p>
+            <p>123 Main Street, Anytown, CA 12345</p>
+            <p>Call us at: (555) 123-4567</p>
+    </div> 
+     </div>*@
+
+    <a class="btn btn-primary p-3" asp-controller="Home" asp-action="Index" role="button">Continue shopping</a>
+
+</main>

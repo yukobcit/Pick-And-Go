@@ -1,0 +1,52 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Welcome to Pick And Go!";
+}
+<main class="login-page md-screen">
+    <div class="w-100 d-flex flex-column align-items-center">
+        <img src="https://i.imgur.com/etMV9Tq.png" class="login-banner">
+        <div class="">
+            <section>
+                <form id="account" method="post" class="d-flex flex-column align-items-center w-100">
+                    <hr />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Input.Email">Email</label>
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Password">Password</label>
+                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Password"/>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <div class="checkbox my-2">
+                            <label asp-for="Input.RememberMe" class="form-label">
+                                <input class="form-check-input" asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="login-button">
+                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary mb-4 ">Log in</button>
+                    </div>
+                    <div class = "d-flex flex-column align-items-center">
+                        <p class="login-prompt">
+                            Forgot Your Password? <a type="button" class="forgot-password-link" id="forgot-password" asp-page="./ForgotPassword">Click Here!</a>
+                        </p>
+                        <p class ="login-prompt">
+                            Don't Have An Account? <a type="button" class="forgot-password-link" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Sign Up Here!</a>
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

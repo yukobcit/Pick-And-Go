@@ -1,0 +1,579 @@
+html {
+    font-size: 14px;
+}
+
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Default setting */
+
+body .container {
+    padding: 0;
+}
+
+header {
+    height: 65px;
+    background-color: #ffaf01;
+}
+
+.root {
+    min-height: calc(100vh - 65px - 60px);
+    display: block;
+}
+
+main {
+    height: 100%;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 2rem;
+}
+
+.bottom {
+    height: 60px;
+    color: #ef6900;
+}
+
+h1, h2, h3, h4 {
+    color: #ef6900;
+}
+
+h1 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+
+.md-screen {
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Navigation */
+
+nav {
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    font-size: 14px;
+}
+
+nav button {
+    font-size: 14px !important;
+}
+
+nav button:hover {
+    color: #ef6900 !important;
+}
+
+nav img {
+    width: 150px;
+    padding-top: 5px;
+}
+
+nav .dropdown button:hover {
+    color: #ef6900 !important;
+}
+
+nav li a:hover {
+    color: #ef6900 !important;
+}
+
+#cart-icon {
+    font-size: 0.7rem;
+    top: 0;
+}
+
+.navbar-toggler:active,
+.navbar-toggler:hover,
+.navbar-toggler:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.navbar-collapse {
+    background-color: #ffaf01;
+}
+
+nav .dropdown {
+    display: block;
+}
+
+.dropdown-menu {
+    background-color: #ffaf01;
+    border:none;
+
+}
+
+.about-us {
+    width:fit-content;
+    white-space:nowrap;
+    padding-left:0;
+    
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu {
+        display: block;
+        position: static;
+        background-color: transparent;
+        border: none;
+    }
+
+        .dropdown-menu li a {
+            color: white !important;
+        }
+
+        .dropdown-menu li:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+    nav .dropdown button:hover {
+        color: white !important;
+        cursor: auto;
+    }
+
+}
+
+/* Bootstrap button styles */
+
+.btn-primary {
+    background-color: #ef6900;
+    border-radius: 5px;
+    color: white;
+    box-shadow: none;
+    outline: none;
+    border: 1px solid #ef6900 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #ffaf01;
+    border: 1px solid #ffaf01 !important;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-outline {
+    background-color: white;
+    color: #ef6900;
+    font-weight: 700;
+    border-radius: 5px;
+    border: none;
+    height: 30px;
+}
+
+.btn-outline-primary {
+    border-color: #ef6900;
+    color: #ef6900;
+}
+
+.btn-outline-primary:hover {
+    background-color: #ef6900;
+    border-color: #ef6900;
+    color: white;
+}
+
+/*.btn-secondary {
+    background-color: #ffaf01;
+    border-color: #ffaf01;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #ef6900;
+    border-color: #ef6900;
+    color: white;
+}
+
+.btn-outline-secondary {
+    background-color: white;
+    border-color: #ffaf01;
+    color: #ffaf01;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #ffaf01;
+    border-color: #ffaf01;
+    color: white;
+}
+*/
+.btn-outline-dark {
+    border-color: lightgray;
+}
+
+/* General accordion styles */
+
+.accordion-body {
+    min-height: 100%;
+}
+
+.accordion-button {
+    border-style: none;
+    background-color: white !important;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+.accordion-button:focus {
+    background-color: white !important;
+    box-shadow: none !important;
+    border-style: none;
+    outline: 0;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: white !important;
+    box-shadow: none !important;
+    border-style: none;
+    outline: 0;
+    color: black;
+}
+
+.accordion-button:link, .accordion-button:visited, .accordion-button:hover, .accordion-button:active {
+    background-color: white !important;
+    box-shadow: none !important;
+    border-style: none;
+    outline: 0;
+}
+
+.accordion-button.collapsed::after {
+    background-image: url("/images/down-arrow.jpg");
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url("/images/down-arrow.jpg");
+}
+
+.col {
+    padding: 0;
+}
+
+/* Radio Button (class: radio-btn) */
+.radio-btn {
+    cursor: pointer;
+    transition: background .2s ease;
+}
+
+.radio-btn input {
+    border: 1px solid gray;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    appearance: none;
+    transition: box-shadow 150ms ease-in-out;
+    pointer-events: none
+}
+
+.radio-btn input:checked {
+    border: 1px solid orange;
+    background-color: orange;
+    box-shadow: inset 0 0 0 2px white;
+}
+ 
+
+/* Order list with expanding/collapsing sections styles */
+
+/*.order-title {
+    display: flex;
+}*/
+
+/*.order-filter {
+    flex-direction: column;
+    margin-left: 50px;
+    margin-top: 10px;
+}
+
+.order-search {
+    flex-direction: column;
+    margin-left: 50px;
+    margin-top: 10px;
+}*/
+
+/*.order-search input[type="text"] {
+    width: 150px;
+}
+
+.order-filter #orderFilter {
+    height: 31px;
+}*/
+
+.col7 form {
+    text-align: center;
+}
+
+/* Modal confirmation window styles */
+
+.modal-table {
+    text-align: left;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+.modal-table td {
+    padding-left: 15px;
+}
+
+/* Ingredient list with expanding/collapsing sections styles */
+
+/*.celldesc {
+    width: 250px;
+}*/
+
+.link-disabled {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: lightgray;
+}
+
+.stock-icon {
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.ingredient-image {
+    width: 80px;
+    height: 80px;
+}
+
+/* Order selection styles */
+
+.sandwich-image {
+    width: 170px;
+    height: 100px;
+}
+
+/* added by Steph to improve mobile view for products and ingredients lists */
+
+.sandwich-image2 {
+    width: 170px;
+    height: 100px;
+}
+
+.ingredient-buttons {
+    column-gap: 4px;
+}
+
+@media (max-width: 768px) {
+    .sandwich-image2 {
+        width: 100%;
+        height: auto;
+    }
+
+    .action-button {
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+    }
+
+    .ingredient-buttons {
+        column-gap: 2px;
+    }
+}
+
+    .button-strip {
+        display: flex;
+        justify-content: center;
+        column-gap: 20px;
+        height: 40px;
+        width: 100%;
+    }
+
+    .radio-group input[type=radio] {
+        transform: scale(1.8);
+        border: 1px solid gray;
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
+        appearance: none;
+    }
+
+    input[type=radio] {
+        transform: scale(1.8);
+    }
+
+        input[type=radio]:checked {
+            border: 1px solid orange;
+            background-color: orange;
+            box-shadow: inset 0 0 0 2px white;
+        }
+
+
+    /* Order history styles */
+
+    .no-padding {
+        padding: 0;
+    }
+
+    .cell-image {
+        width: 25px;
+    }
+
+    .cell-amount {
+        text-align: right;
+    }
+
+    .icon-btn {
+        border: 1px solid #ef6900;
+        border-radius: 5px;
+        color: #ef6900;
+        background-color: transparent;
+        padding: 3px 7px;
+    }
+
+        .icon-btn:hover {
+            background-color: #ef6900;
+            color: white;
+        }
+
+    .orders select {
+        border: 1px solid gray;
+        padding: 1px;
+    }
+
+    .orders input {
+        border: 1px solid gray;
+    }
+
+
+    /* Favorites styles */
+
+    .modal-a {
+        text-decoration: none;
+    }
+
+    .add-button {
+        min-width: 150px;
+    }
+
+    .text {
+        color: #ffaf01;
+    }
+
+    .favorites table * {
+        border: none;
+    }
+
+
+    /* Transactions styles */
+
+    .date-filter {
+    }
+
+        .date-filter input[type="date"] {
+            width: 125px;
+        }
+
+    .transactions select {
+        border: 1px solid gray;
+        padding: 1px;
+    }
+
+    .transactions input {
+        border: 1px solid gray;
+    }
+
+    /* Landing Page */
+
+    .landing-page {
+        background-image: linear-gradient(#ffaf01, #ef6900);
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        z-index: 10;
+        overflow: auto;
+    }
+
+        .landing-page img {
+            max-width: 700px;
+        }
+
+        .landing-page .button {
+            max-width: 600px;
+        }
+
+        .landing-page a {
+            text-decoration: none;
+            color: #ef6900;
+            transition: all 0.2s ease-in-out;
+        }
+
+            .landing-page a:hover {
+                background-color: rgba(0,0,0,0.1);
+                transition: all 0.2s ease-in-out;
+            }
+
+    /* Home */
+    .home {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .card::before {
+        content: " ";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: rgba(0,0,0,0.4);
+        z-index: 1;
+    }
+
+    .card * {
+        z-index: 2;
+    }
+
+    /* History */
+
+    .history table * {
+        border: none;
+    }
+
+    /* Forms */
+
+    .form-group {
+        padding: 10px;
+    }
+
+        .form-group label {
+            font-weight: bold;
+            padding-bottom: 5px;
+        }
+
+        .form-group input {
+            padding: 0.8rem;
+            width: 400px;
+            box-shadow: none;
+        }
+
+            .form-group input:focus,
+            .form-group input:active {
+                border: 2px solid #ef6900;
+                outline: none;
+                box-shadow: none;
+            }
+
+        .form-group select {
+            padding: 0.8rem;
+            box-shadow: none;
+        }
+
+            .form-group select:focus,
+            .form-group select:active {
+                border: 2px solid #ef6900;
+                outline: none;
+                box-shadow: none;
+            }
+
+    /* Pagination */
+    .required {
+        color: red;
+        background-color: yellow;
+    }

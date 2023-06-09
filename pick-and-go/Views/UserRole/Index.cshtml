@@ -1,0 +1,34 @@
+﻿@model IEnumerable<PickAndGo.ViewModels.UserVM>
+
+@{
+    ViewData["Title"] = "User Roles";
+}
+
+<main class="userroles md-screen">
+    <h1>Existing User Emails</h1>
+    <div class="d-flex flex-column">
+ 
+
+        <table class="table">
+            <thead class="table-heading">
+                <tr>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="align-middle">
+                        <td>
+                            @item.Email
+                        </td>
+                        <td class="text-end">
+                            <a type="button" class="btn btn-sm btn-outline-primary" asp-action="Detail" asp-route-userName=@item.Email>View Roles</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</main>

@@ -1,0 +1,39 @@
+﻿@using PickAndGo.ViewModels
+@model CustomerVM
+
+@{
+    ViewData["Title"] = "Edit Customer";
+
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/Erik.css" asp-append-version="true" />
+</head>
+
+<div class="header-titles">
+    <h1>Change Profile Details</h1>
+    <h2 class="header-name">@Model.FirstName @Model.LastName</h2>
+</div>
+<form method="post" asp-action="CustomerEdit" enctype="multipart/form-data">
+
+    <div class="customer-edit-page flex-column">
+        <div class="customer-edit-form">
+            <label asp-for="FirstName">First Name</label>
+            <input asp-for="FirstName" class="form-control" placeholder="First Name">
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="customer-edit-form">
+            <label asp-for="LastName">Last Name</label>
+            <input asp-for="LastName" class="form-control" placeholder="Last Name">
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="customer-edit-form">
+            <label asp-for="PhoneNumber">Phone Number</label>
+            <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number">
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+    </div>
+</form>
+@ViewBag.Message

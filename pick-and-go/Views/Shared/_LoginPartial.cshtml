@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PickAndGo.Repositories
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject CustomerRepository CustomerRepository
+
+@{
+    string firstName = "";
+    if (SignInManager.IsSignedIn(User))
+    {
+        var email = User.Identity.Name;
+        var customer = CustomerRepository.ReturnCustomerByEmail(email);
+        firstName = customer.FirstName;
+    }
+}
+
+<ul class="navbar-nav aa justify-content-end w-100">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item  align-items-center d-flex">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-white shadow-none focus:shadow-none">Logout</button>
+            </form>
+        </li>
+        <li class=" align-items-center d-flex me-3">
+            <p class="text-white m-auto pe-none  ml-5">Hello @firstName!</p>
+        </li>
+
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white me-1" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

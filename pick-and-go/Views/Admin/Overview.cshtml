@@ -1,0 +1,169 @@
+﻿@model PickAndGo.ViewModels.OverviewVM;
+
+@{
+    ViewData["Title"] = "Overview";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int outstanding = Model != null ? Model.Outstanding : 0;
+    int completed = Model != null ? Model.Completed : 0;
+    decimal outstandingVal = Model != null ? Model.OutstandingVal : 0;
+    decimal completedVal = Model != null ? Model.CompletedVal : 0;
+    string viewDate = Model.ViewDate;
+    int accounts = Model != null ? Model.Accounts : 0;
+    int guests = Model != null ? Model.Guests : 0;
+}
+
+<main class="overview">
+    <h1>Overview</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6 shadow-sm border rounded p-3">
+                <h4>Orders</h4>
+ 
+                <form asp-controller="Admin" asp-action="Overview" method="get" class="d-flex gap-2">
+                    <button type="submit" name="submitBtn" class="" value="<"><i class="fa-solid fa-chevron-left"></i></button>
+                    <input type="date" name="currentDate" class="border w-100 text-center" value="@viewDate" required />
+                    <button type="submit" name="submitBtn" class="">Go</button>
+                    <button type="submit" name="submitBtn" class="" value=">" @(Convert.ToDateTime(viewDate).CompareTo(DateTime.Now.Date) < 0 ? "" : "disabled")><i class="fa-solid fa-chevron-right"></i></button>
+                </form>
+                <div class="update text-end fs-6">Last Update: @ViewData["CurrentTime"]</div>
+
+                <div class="orders fw-bold d-flex justify-content-center p-3">
+                    Outstanding
+                </div>
+                <div class="d-flex">
+                    <div class="w-100 d-flex justify-content-center">
+                        @outstanding
+                    </div>
+                    <div class="w-100 d-flex justify-content-center">
+                        $ @outstandingVal
+                    </div>
+                </div>
+
+                <div class="orders fw-bold d-flex justify-content-center p-3">
+                    Completed
+                </div>
+                <div class="d-flex">
+                    <div class="w-100 d-flex justify-content-center">
+                        @completed
+                    </div>
+                    <div class="w-100 d-flex justify-content-center">
+                        $ @completedVal
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6  shadow-sm border rounded p-3">
+                <h4>Customers</h4>
+                <table class="table">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead class="table-heading">
+                        <tr>
+                            <th>
+                                Account Holders
+                            </th>
+                            <th>
+                                Guests
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @accounts
+                            </td>
+                            <td>
+                                @guests
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--Row-->
+
+        <div class="row">
+            <div class="col-12 col-lg-6  shadow-sm border rounded p-3">
+                <h4>Ingredients - Out of Stock</h4>
+                <table class="table">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead class="table-heading">
+                        <tr>
+                            <th>
+                                Category
+                            </th>
+                            <th>
+                                Description
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (@Model.Ingredients.Count() == 0)
+                        {
+                            <p>There are currently no ingredients out of stock</p>
+                        }
+                        else
+                        {
+                            @foreach (var ing in Model.Ingredients)
+                            {
+                                <tr>
+                                    <td>
+                                        @ing.CategoryId
+                                    </td>
+                                    <td>
+                                        @ing.Description
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="col-12 col-lg-6 shadow-sm border rounded p-3">
+                <h4>Best Sellers - Top 5 (Excluding Breads)</h4>
+                <table class="table">
+                    <colgroup>
+                        <col style="width: 25%;">
+                        <col style="width: 25%;">
+                    </colgroup>
+                    <thead class="table-heading">
+                        <tr>
+                            <th>
+                                Category
+                            </th>
+                            <th>
+                                Description
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ing in Model.TopFive)
+                        {
+                            <tr>
+                                <td>
+                                    @ing.CategoryId
+                                </td>
+                                <td>
+                                    @ing.Description
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</main>

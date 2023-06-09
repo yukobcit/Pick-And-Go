@@ -1,0 +1,196 @@
+﻿@using PickAndGo.ViewModels
+@model IEnumerable<FavoritesVM>
+
+@{
+    ViewData["Title"] = "Favorites";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="~/css/Erik.css" asp-append-version="true" />
+</head>
+
+<div class="header-titles">
+    <h1>Favourites</h1>
+    <h2 class="header-name">@ViewData["CustomerName"]</h2>
+</div>
+
+<main class="favorites md-screen">
+
+    @if (Model.Count() == 0)
+    {
+        <div class="d-flex flex-column align-items-center justify-content-center h-100">
+            <div><i class="fa-solid fa-heart fs-2" style="color:#ffaf01"></i></div>
+            <div class="text-secondary">No Favourites yet. </div>
+        </div>
+    }
+    @foreach (var favorite in Model)
+    {
+        var dataTargetConfirm = "#ModalYes" + @favorite.LineId;
+        var dataTargetConfirm2 = "#ModalYes2" + @favorite.LineId;
+        var modalID = "ModalYes" + @favorite.LineId;
+        var modalID2 = "ModalYes2" + @favorite.LineId;
+        <hr />
+        <table class="table">
+            <thead>
+                <tr class="no-padding">
+                    <th class="col-1 text-center">
+                        <a class="modal-a" asp-action="UpdateFavorites" asp-route-custId="@favorite.CustomerId" asp-route-orderId="@favorite.OrderId" asp-route-lineId="@favorite.LineId" asp-route-isFavorite=true asp-route-name="" data-bs-toggle="modal" data-bs-target="@dataTargetConfirm">
+                            <img class="cell-image" src="~/images/red-heart.png" />
+                        </a>
+
+                        @using (Html.BeginForm("UpdateFavorites", "Order", new
+                        {
+                            custId = @favorite.CustomerId,
+                            orderId = @favorite.OrderId,
+                            lineId = @favorite.LineId,
+                            isFavorite = true,
+                            name = @favorite.FavoriteName,
+                            fromHistory = false
+
+                        }, FormMethod.Post))
+                        {
+                            <!-- Modal -->
+                            <div class="modal fade bd-example-modal-sm" id=@modalID tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="confirmModalLabel">Remove from favorites?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class="modal-table">
+                                                <tr>
+                                                    <td>Favorite Name:</td>
+                                                    <td>@favorite.FavoriteName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Product:</td>
+                                                    <td>@favorite.Description</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                            <button type="submit" class="btn btn-primary">Yes</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        @using (Html.BeginForm("ChangeFavoritesName", "Order", new
+                        {
+                            custId = @favorite.CustomerId,
+                            orderId = @favorite.OrderId,
+                            lineId = @favorite.LineId,
+                            name = @favorite.FavoriteName
+
+                        }, FormMethod.Post))
+                        {
+                            <!-- Modal -->
+                            <div class="modal fade bd-example-modal-sm" id=@modalID2 tabindex="-1" aria-labelledby="confirmModalLabel2" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="confirmModalLabel2">Change name of favorite?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class="modal-table">
+                                                <tr>
+                                                    <td>Favorite Name:</td>
+                                                    <td>@favorite.FavoriteName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Product:</td>
+                                                    <td>@favorite.Description</td>
+                                                </tr>
+                                            </table>
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="favoriteName" class="col-form-label">Name of favorite:</label>
+                                                    <input type="text" class="form-control" id="favoriteName" name="favoriteName" value="@favorite.FavoriteName" maxlength="25" required>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                            <button type="submit" class="btn btn-primary">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </th>
+                    <th class="col">
+                        @favorite.FavoriteName
+
+                        <a class="modal-a" asp-action="ChangeFavoritesName" asp-route-custId="@favorite.CustomerId" asp-route-orderId="@favorite.OrderId" asp-route-lineId="@favorite.LineId" asp-route-isFavorite=true asp-route-name="" data-bs-toggle="modal" data-bs-target="@dataTargetConfirm2">
+                            <i class="fa-solid fa-pen ms-2" style="color:gray"></i>
+                        </a>
+                    </th>
+                    <th class="col"></th>
+                    <th class="col add-button text-end" colspan="2">
+                        <button class="btn btn-primary btn-sm" onclick="addToCartFromFav(event)" data-productId=@favorite.ProductId data-description="@favorite.Description" data-basePrice=@favorite.CurrentPrice data-favId=@favorite.OrderStr>Add to Order</button>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody class="accordion" id="PickAndGoAccordion">
+                <tr class="no-padding">
+                    <td class="col"></td>
+                    <td class="col-6">@favorite.Description</td>
+                    <td class="col"></td>
+                    <td class="col cell-amount fw-bold">@String.Format("${0:0.00}", favorite.LineValue)</td>
+                    <td class="col-1">
+                        <button class="accordion-button collapsed m-0" style="" type="button" data-bs-toggle="collapse" data-bs-target="#@favorite.OrderStr" aria-expanded="false" aria-controls="@favorite.OrderStr"></button>
+                    </td>
+                </tr>
+
+                <tr id="@favorite.OrderStr" class="accordion-collapse collapse" aria-labelledby="PickAndGoAccordion">
+                    <td class="accordion-detail accordion-body p-0" colspan="12">
+                        <!-- Ingredients -->
+                        <table class="accordion-table table mb-0">
+                            <tr>
+                                <td class="col-1"></td>
+                                <td class="col ps-3"><i class="fa-solid fa-caret-right text pe-1"></i>Base sandwich price</td>
+                                <td class="col cell-amount" colspan="2">@String.Format("${0:0.00}", favorite.CurrentPrice)</td>
+                                <td class="col-1"></td>
+                            </tr>
+
+                            @foreach (var line in favorite.Ingredients)
+                            {
+                                <tr class="ingredientTable-@favorite.OrderStr" + @favorite.OrderId.ToString()>
+                                    <td class="ingredientId" hidden>@line.IngredientId</td>
+                                    <td class="quantity" hidden>@line.Quantity</td>
+                                    <td class="price" hidden>@line.CurrentPrice</td>
+
+                                    <td class="col"></td>
+                                    <td class="col ps-3"><i class="fa-solid fa-caret-right text pe-1"></i><span class="description">@line.IngDescription</span></td>
+                                    @if (line.Quantity == 1)
+                                    {
+                                        <td class="col text-end">Reg</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="col text-end">Extra</td>
+                                    }
+                                    <td class="col-1 cell-amount">@String.Format("${0:0.00}", line.IngValue)</td>
+                                    <td class="col-1"></td>
+                                </tr>
+                            }
+                        </table>
+                        <!--End of ingredients-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    <hr />
+    <div class="message text-center text-success" style="border-radius: 30px;" id="message">@ViewBag.Message</div>
+
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/cart.js"></script>
+

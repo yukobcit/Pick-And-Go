@@ -1,0 +1,71 @@
+﻿@model PickAndGo.ViewModels.CustomerVM
+
+@{
+    ViewData["Title"] = "Customer Details";
+    
+}
+<head>
+    <link rel="stylesheet" href="~/css/Erik.css" asp-append-version="true" />
+</head>
+
+    <div class="header-titles">
+        <h1>Customer Profile</h1>
+        <h2 class ="header-name">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h2>
+    </div>
+    <main class="customer-details">
+    <div>
+        <table class="table customer-details-table">
+            <tbody>
+                <tr>
+                    <th class="title-name">Full Name</th>
+                    <td class="title-result">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</td>
+                </tr>
+                <tr>
+                    <th class="title-name">Email Address</th>
+                    <td class="title-result">@Html.DisplayFor(model => model.EmailAddress)</td>
+                </tr>
+                <tr>
+                    <th class="title-name">Phone Number</th>
+                    <td class="title-result">@Html.DisplayFor(model => model.PhoneNumber)</td>
+                </tr>
+                <tr>
+                    <th class="title-name">Last Ordered On</th>
+                    <td class="title-result">
+                        @if (Model.DateLastOrdered == null)
+                        {
+                            @:You Have Not Ordered Anything Yet!
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(model => model.DateLastOrdered)
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th class="title-name">Date Signed Up</th>
+                    <td class="title-result">
+                        @if (Model.DateSignedUp == null)
+                        {
+                            @:You Did Not Sign Up Yet!
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(model => model.DateSignedUp)
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        <div class="customer-details-buttons d-flex flex-column align-items-center">
+        <a type="button" class="btn btn-primary" asp-action="CustomerEdit" asp-route-id="@Model?.CustomerId">Edit</a>
+        <a type="button" class="btn btn-primary" asp-controller="Order" asp-action="History" asp-route-customerId="@Model?.CustomerId">Order History</a>
+        <a type="button" class="btn btn-primary" asp-controller="Order" asp-action="Favorites" asp-route-customerId="@Model?.CustomerId">Favourites</a>
+        <a type="button" class="btn btn-primary" asp-controller="Home" asp-action="Index">Back Home</a>
+        </div>
+    <div class="message-prompt">
+       @ViewBag.Message
+    </div>
+    </main>
+
+
